@@ -53,11 +53,11 @@ exports.deleteComment = async (req, res, next) => {
     console.log(
       `Comment (ID: ${comment._id}) by user (${
         comment.user
-      }) was deleted on: ${new Date()}`
+      }) was deleted.`
     );
 
     res.status(200).json({
-      message: `Comment by User(ID: ${comment.user}) on Post(ID: ${comment.postId}) was deleted`,
+      message: `Comment by User(ID: ${comment.user}) on Post(ID: ${comment.postId}) was deleted by ${req.user.username}.`,
     });
   } catch (error) {
     console.error("Error deleting comment:", error);

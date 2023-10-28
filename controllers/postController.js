@@ -64,11 +64,7 @@ exports.editPost = async (req, res, next) => {
 
     post.save();
 
-    console.log(
-      `Post (ID: ${post._id}) by user (${
-        post.user
-      }) was edited on: ${new Date()}`
-    );
+    console.log(`Post (ID: ${post._id}) by user (${post.user}) was edited by ${req.user.username}.`);
     res.status(200).json({ message: "Post Edited", post: post });
   } catch (error) {
     console.error("Error editing post:", error);
@@ -91,13 +87,11 @@ exports.deletePost = async (req, res, next) => {
     }
 
     console.log(
-      `Post (ID: ${deletedPost._id}) by user (${
-        deletedPost.user
-      }) was deleted on: ${new Date()}`
+      `Post (ID: ${deletedPost._id}) by user (${deletedPost.user}) was deleted.`
     );
 
     res.status(200).json({
-      message: `Post by User(ID: ${deletedPost.user}) was deleted`,
+      message: `Post by User(ID: ${deletedPost.user}) was deleted by ${req.user.username}.`,
     });
   } catch (error) {
     res.status(500).json({ message: "Error deleting post:", error });
